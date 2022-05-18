@@ -1,92 +1,112 @@
-# Theodora and Perry's Shell
-- - -
-### Description
-Theodora and Perry's Shell is a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). Additional functions are also included. This program was written entirely in C as a milestone project for ALX Software Engineering School.
+# 0x15. C - Simple Shell
 
-### Installation
-Clone this repository into your working directory. For best results, files should be compiled with GCC and the following flags: -Wall -Wextra -Werror -pedantic -Wno-format.
+## Description
 
-### Usage
-After compilation, the resulting program can run stand-alone, either in interactive or non-interactive mode.
+In this project we are tasked with creating our own simple UNIX command interpreter. The program must have the exact same output as sh (/bin/sh) as well as the exact same error output. The only difference is when you print an error, the name of the program must be equivalent to your argv[0].
 
-#### Interactive Mode
-In interactive mode, simply run the program and wait for the prompt to appear. From there, you can type commands freely, exiting with either the "exit" command or ctrl-D.
+---
 
-#### Non-Interactive Mode
-In non-interactive mode, echo your desired command and pipe it into the program like this:
-```sh
-echo "ls" | ./shell
+## Instructions
+
+* Compiling the program:
+`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
+
+* Interactive mode:
 ```
-In non-interactive mode, the program will exit after finishing your desired command(s).
-
-#### Included Built-Ins
-Our shell has support for the following built-in commands:
-
-Command | Definition
---------|---------------
-exit [n] | Exit the shell, with an optional exit status, n.
-env      | Print the environment.
-setenv [var] [value] | Set an environment variable and value. If the variable exists, the value will be updated.
-unsetenv [var] | Remove an environment variable.
-cd [dir] | Change the directory.
-help [built-in] | Read documentation for a built-in.
-
-The following built-in commands may be supported in future versions:
-
-Command | Definition
---------|---------------
-alias   | Set an Alias.
-history | View the history of the shell.
-
-
-#### Outside Programs
-Our shell can run outside programs by typing their absolute paths (/bin/ls) or the executable name (ls), IF their directory is included in the PATH.
-
-### Examples
-
-```sh
-$ ls -l
-total 8
-drwxrwxr-x 1 vagrant vagrant Apr 2 13:23 directory_1
-drwxrwxr-x 2 vagrant vagrant Apr 2 20:30 directory_2
+$ ./hsh
+($) /bin/ls
+hsh main.c shell.c
+($)
+($) exit
+$
 ```
-```sh
-$ /bin/pwd
-/home/vagrant/shell
-```
-```sh
-$ hello world
-./hsh: 1: hello: not found
-```
-```sh
-$ help env
-env: env
-	Print the environment.
-```
-### Included Files
 
- - main.c - functions for calling the shell and initializing the shell struct
- - shell.c - functions for running the basic shell logic
- - shell_helpers.c - functions for helping the shell run
- - split_string.c - functions for splitting string from the user
- - string_helpers1.c - functions for manipulating strings
- - string_helpers2.c - functions for manipulating strings
- - built_ins.c - functions for built-ins
- - built_in_helpers.c - functions for helping the built-in functions
- - help.c - functions for the help built-in
- - help2.c - functions for the help built-in
- - cd.c - functions for the cd built-in
- - cd2.c - functions for the cd built-in
- - _getenv.c - functions for getting elements from the environment
- - env.c - functions for the env, setenv, and unsetenv built-ins
- - llfuncs1.c - linked list functions
- - llfuncs2.c - linked list functions
- - expansions.c - functions for dealing with the $? and $$ expansions
- - check_path.c - functions for checking the path of an executable
- - error_handler.c - functions for dealing with errors
- - free.c - functions for freeing allocated memory
- - main.h - header file
+* Non-interactie mode:
+```
+$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c test_ls_2
+$
+$ cat test_ls_2
+/bin/ls
+/bin/ls
+$
+$ cat test_ls_2 | ./hsh
+hsh main.c shell.c test_ls_2
+hsh main.c shell.c test_ls_2
+$
+```
+---
 
-### Credits
-All code written by [Theodora Addeafi Gyambrah](https://github.com/theody85) and [Kwapee Perry Amoako](https://github.com/Kwapee).
 
+## Files
+
+File|Description
+---|---
+[main.c](./main.c)|entry point for shell
+[shell.c](./shell.c)|executes the shell
+[shell.h](./shell.h)|header
+[builtins.c](./builtins.c)|built-in functions
+[helpers.c](./helpers.c)|helper functions
+[extraneous.c](./extraneous.c)|more helper functions
+[_getenv.c](./_getenv.c)|gets inputted env
+[search_cwd.c](./search_cwd.c)|gets current working dir
+[find_path.c](./find_path.c)|finds PATH
+[bridge.c](./bridge.c)|checks if builtin or not
+[execute.c](./execute.c)|executes builtin or binary
+[man_1_simple_shell](./man_1_simple_shell)|man page
+
+---
+
+## Project Requirements
+- All your files will be compiled on Ubuntu 20.04 LTS
+- Your C programs and functions will be compiled with gcc, using the options `-Wall -Werror -Wextra -pedantic -std=gnu89`
+- All your files should end with a new line
+- A README.md file, at the root of the folder of the project is mandatory
+- Your code should use the Betty style. It will be checked using [betty-style.pl](https://github.com/holbertonschool/Betty/blob/master/betty-style.pl) and [betty-doc.pl](https://github.com/holbertonschool/Betty/blob/master/betty-doc.pl)
+- No more than 5 functions per file
+- All your header files should be include guarded
+- Use system calls only when you need to
+
+---
+
+## Tasks
+
+### 0. README, man, AUTHORS
+* Write a (README)[./README.md]
+* Write a (man)[./man_1_simple_shell] for your shell.
+* You should have an (AUTHORS)[./AUTHORS] file at the root of your repository, listing all individuals having contributed content to the repository.
+
+### 1. Betty would be proud
+* Write a beautiful code that passes the Betty checks
+
+### 2. Simple shell 0.1
+* Write a UNIX command line interpreter.
+* Your Shell should:
+	- Display a prompt and wait for the user to type a command. A command line always ends with a new line.
+	- The prompt is displayed again each time a command has been executed.
+	- The command lines are simple, no semicolons, no pipes, no redirections or any other advanced features.
+	- The command lines are made only of one word. No arguments will be passed to programs.
+	- If an executable cannot be found, print an error message and display the prompt again.
+	- Handle errors.
+	- You have to handle the "end of file" condition (Ctrl+D)
+
+### 3. Simple shell 0.2
+* Handle command lines with arguments
+
+### 4. Simple shell 0.3
+* Handle the PATH
+
+### 5. Simple shell 0.4
+* Implement the exit built-in, that exits the shell
+* Usage: exit
+* You dont have to handle any argument to the built-in exit
+
+### 6. Simple shell 1.0
+* Implement the env built-in, that prints the current environment
+
+
+---
+
+## Authors
+* **Theodora Addeafi Gyambrah** - [theody85](https://github.com/theody85)
+* **Kwapee Perry Amoako** - [Kwapee](https://github.com/Kwapee)
