@@ -1,7 +1,7 @@
-# Josef and Tu's Shell
+# Theodora and Perry's Shell
 - - -
 ### Description
-Josef and Tu's Shell is a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). Additional functions are also included. This program was written entirely in C as a milestone project for Holberton School.
+Theodora and Perry's Shell is a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). Additional functions are also included. This program was written entirely in C as a milestone project for Holberton School.
 
 ### Installation
 Clone this repository into your working directory. For best results, files should be compiled with GCC and the following flags: -Wall -Wextra -Werror -pedantic -Wno-format.
@@ -88,5 +88,5 @@ env: env
  - holberton.h - header file
 
 ### Credits
-All code written by [Tu Vo](https://github.com/tuvo1106) and [Josef Goodyear](https://github.com/JosefGoodyear).
+All code written by [Theodora Addeafi Gyambrah](https://github.com/theody85) and [Perry ](https://github.com/Kwapee).
 
