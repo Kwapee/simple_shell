@@ -1,7 +1,7 @@
 # Theodora and Perry's Shell
 - - -
 ### Description
-Theodora and Perry's Shell is a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). Additional functions are also included. This program was written entirely in C as a milestone project for Holberton School.
+Theodora and Perry's Shell is a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). Additional functions are also included. This program was written entirely in C as a milestone project for ALX Software Engineering School.
 
 ### Installation
 Clone this repository into your working directory. For best results, files should be compiled with GCC and the following flags: -Wall -Wextra -Werror -pedantic -Wno-format.
@@ -85,8 +85,8 @@ env: env
  - check_path.c - functions for checking the path of an executable
  - error_handler.c - functions for dealing with errors
  - free.c - functions for freeing allocated memory
- - holberton.h - header file
+ - main.h - header file
 
 ### Credits
-All code written by [Theodora Addeafi Gyambrah](https://github.com/theody85) and [Perry ](https://github.com/Kwapee).
+All code written by [Theodora Addeafi Gyambrah](https://github.com/theody85) and [Kwapee Perry Amoako](https://github.com/Kwapee).
 
