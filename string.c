@@ -1,100 +1,114 @@
-#include "header.h"
+#include "shell.h"
 
-int _strncmp(char *s1, char *s2, int n)
+/**
+ * _strdup - returns a pointer to a newly allocated space in memory, which
+ * contains a copy of the string given as a parameter
+ * @str: pointer to a string
+ * Return: pointer to a string
+ */
+char *_strdup(char *str)
 {
-	int i;
+	int i, l;
+	char *new;
 
-	for (i = 0; i < n - 1; i++)
+	if (!str)
 	{
-		if (s1[i] == '\0' || s2[i] == '\0')
-		{
-			break;
-		}
-
-		if (s1[i] != s2[i]) /* if chars are different, break */
-		{
-			break;
-		}
+		return (NULL);
 	}
-
-	return (s1[i] - s2[i]); /* return difference in chars */
+	for (l = 0; str[l] != '\0';)
+	{
+		l++;
+	}
+	new = malloc(sizeof(char) * l + 1);
+	if (!new)
+	{
+		return (NULL);
+	}
+	for (i = 0; i < l; i++)
+	{
+		new[i] = str[i];
+	}
+	new[l] = str[l];
+	return (new);
 }
 
-int _strlen(const char *str)
+/**
+ * concat_all - concats 3 strings in a newly allocated memory
+ * @name: first string
+ * @sep: second string
+ * @value: Third string
+ * Return: pointer to the new string
+ */
+char *concat_all(char *name, char *sep, char *value)
 {
-	int i;			/* i used as a counter */
+	char *result;
+	int l1, l2, l3, i, k;
 
-	i = 0;			/* initialize at 0 */
+	l1 = _strlen(name);
+	l2 = _strlen(sep);
+	l3 = _strlen(value);
 
-	/* while string isn't over */
-	while (*str != '\0')
+	result = malloc(l1 + l2 + l3 + 1);
+	if (!result)
+		return (NULL);
+
+	for (i = 0; name[i]; i++)
+		result[i] = name[i];
+	k = i;
+
+	for (i = 0; sep[i]; i++)
+		result[k + i] = sep[i];
+	k = k + i;
+
+	for (i = 0; value[i]; i++)
+		result[k + i] = value[i];
+	k = k + i;
+
+	result[k] = '\0';
+
+	return (result);
+}
+
+/**
+ * _strlen - it gives the length of a string
+ * @s: pointer to the string
+ * Return: the length of string
+ */
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (*(s + i) != '\0')
 	{
-		i++;		/* increase counter */
-		str++;		/* pointer arithmetic for next char */
+		i++;
 	}
-
 	return (i);
 }
 
-char *_strcat(char *dest, const char *src)
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char c)
 {
-	size_t dest_len = _strlen(dest);
-	size_t i;
-
-	for (i = 0; src[i] != '\0'; i++)
-	{
-		dest[dest_len + i] = src[i];
-	}
-
-	dest[dest_len + i] = '\0';
-
-	return (dest);
+	return (write(1, &c, 1));
 }
 
-char *_strcpy(char *dest, const char *src)
+/**
+ * _puts - prints a string
+ * @str: pointer to string
+ */
+
+void _puts(char *str)
 {
-	size_t i;
+	int i = 0;
 
-	for (i = 0; src[i] != '\0'; i++)
+	while (str[i])
 	{
-		dest[i] = src[i];
+		_putchar(str[i]);
+		i++;
 	}
-
-	i++;
-	dest[i] = '\0';
-
-	return (dest);
-}
-
-/* on error, returns NULL */
-char *_strdup(char *str)
-{
-	int i, length;
-	char *str2; 			/* hold the second string */
-
-	for (i = 0; *str != '\0'; i++) /* get the length */
-	{
-		str++;
-	}
-
-	length = i;
-
-	str = str - length; 		/* pointer arithmetic to first element */
-
-	str2 = malloc(sizeof(char) * (length + 1)); /* assign the memory */
-
-	if (str2 == NULL)	/* check the memory */
-	{
-		perror("strdup");
-		return (NULL);
-	}
-
-	for (i = 0; i <= length; i++)	/* copy null char as well */
-	{
-		*str2 = *str; 		/* copy char */
-		str++;			/* increase */
-		str2++;			/* char */
-	}
-
-	return (str2 - length - 1); 	/* return the pointer */
 }
